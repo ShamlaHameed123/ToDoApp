@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+	<div class="main">
+  <h2 align="center">Welcome, {{ user.get_full_name }}!</h2>
+ <h3 align="center"> Task List </h3>
+ <table id="tabledata" width=100% class="table is-hoverable" padding-top="10px">
+
+	 <thead>
+		 <tr>
+			 <th>Title</th>
+			 <th>Created Date</th>
+			 <th>Due Date</th>
+			 <th>Status</th>
+			 <th>Delete</th>
+		</tr>
+	</thead>
+	{% for task in todo %}
+							 <tr>
+									 <td>
+											 {{ task.title }}
+									 </td>
+									 <td>
+											 {{ task.content }}
+									 </td>
+									 <td>
+											 {{ task.due_date }}
+									 </td>
+									 <td>
+											 {{ task.status }}
+									 </td>
+									 <td>
+
+											<div class="wrapper">
+												<button id="myBtn" class="newbutton" >Edit task</button>
+												{# <button class="button" id="myBtn">Add new task</button> #}
+												<div id="myModal" class="modal">
+
+												  <!-- Modal content -->
+												  <div class="modal-content">
+												    <span class="close"></span>
+														<form method="POST" action="/todo/edit/{{task.id}}">{% csrf_token %}
+															<p><b>Add/Edit task</b></p>
+											  <label for="title">Title:</label>
+											  <input type="text" id="title" name="title"></br>
+											  <label for="content" align="center">Content:</label>
+												<input type="text" id="content" name="content"></br>
+												<label for="duedate">Due Date:</label>
+											  <input type="date" id="due-date" name="due_date"><br>
+												<label for="status">Status:</label>
+												  <select id="status" name="status">
+													  <option value="todo">To Do</option>
+													  <option value="inprogress">In Progress</option>
+													  <option value="completed">Completed</option>
+													</select></br>
+											  <input type="submit" value="Submit">
+											</form>
+
+												  </div>
+
+												</div>
+											</div>
+									 </td>
+
+							 </tr>
+					 {% endfor %}
+ </table>
+</div>
+<div class="wrapper1">
+	<button id="myBtn1" class="button1" >Add new task</button>
+	{# <button class="button" id="myBtn">Add new task</button> #}
+	<div id="myModal1" class="modal">
+
+	  <!-- Modal content -->
+	  <div class="modal-content1">
+	    <span class="close"></span>
+			<form method="POST" action="/todo/add_task/">{% csrf_token %}
+				<p><b>Add new task</b></p>
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title"></br>
+  <label for="content" align="center">Content:</label>
+	<input type="text" id="content" name="content"></br>
+	<label for="duedate">Due Date:</label>
+  <input type="date" id="due-date" name="due_date"><br>
+	<label for="status">Status:</label>
+	  <select id="status" name="status">
+		  <option value="todo">To Do</option>
+		  <option value="inprogress">In Progress</option>
+		  <option value="completed">Completed</option>
+		</select></br>
+  <input type="submit" value="Submit">
+</form>
+
+	  </div>
+
+	</div>
+</div>
+
+
+{% endblock %}

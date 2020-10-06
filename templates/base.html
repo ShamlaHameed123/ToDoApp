@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+	<!-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
+	<title>{% block title %}ToDo App{% endblock %}</title>
+</head>
+<body>
+	<header align="center">
+		<h1>ToDo App</h1>
+		{% if user.is_authenticated %}
+		<a href="{% url 'logout' %}">logout</a>
+		{% else %}
+		<a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+		{% endif %}
+		<hr>
+	</header>
+	<main>
+		{% block content %}
+		{% endblock %}
+	</main>
+		<script src="{% static 'js/main.js' %}"></script>
+		<script src="{% static 'js/newmodal.js' %}"></script>
+		<script src="{% static 'js/addnewmodal.js' %}"></script>
+
+</body>
+</html>
