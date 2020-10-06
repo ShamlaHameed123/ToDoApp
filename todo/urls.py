@@ -15,23 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
+
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
 
-from daytasks.views import home, signup, delete, add_task, edit_task
+from daytasks import views
 
 
 urlpatterns = [
-     path('todo/', home, name='home'),
-     path('todo/home/', home, name='home'),
+     path('todo/', views.home, name='home'),
+     path('todo/home/', views.home, name='home'),
      path('todo/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
      path('todo/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
-     path('signup/', signup, name='signup'),
-     path('todo/delete/<int:task_id>', delete, name='delete'),
-     path('todo/add/', add_task, name='add'),
-     path('todo/edit/<int:task_id>', edit_task, name='edit'),
+     path('signup/', views.signup, name='signup'),
+     path('todo/delete/<int:task_id>', views.delete, name='delete'),
+     path('todo/add/', views.add_task, name='add'),
+     path('todo/edit/<int:task_id>', views.edit_task, name='edit'),
      path('todo/admin/', admin.site.urls),
 
 
